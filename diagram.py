@@ -1,4 +1,5 @@
 import pickle
+import make_diagram
 
 class Diagram():
     def __init__(self, filename, project_file):
@@ -22,8 +23,8 @@ class Diagram():
         file = open(self.__filename, "rb")
         data = pickle.load(file)
         file.close()
-        diagram = {name: f"{name} | {attribute} | {methods}"}      
-        data[self.__project_file][name] = f"{name} | {attribute} | {methods}"
+        diagram = make_diagram.Make_diagram(name, attribute, methods)      
+        data[self.__project_file][name] = diagram.make_diagram()
         file = open(self.__filename, "wb")
         pickle.dump(data, file)
         file.close()
